@@ -17,11 +17,12 @@ void TriParSelection(int T[]) {
 			if(T[m] > T[j]) {
 			
 				m = j;
-				temp = T[m];
-				T[m] = T[j];
-				T[j] = temp;
-				m = i;
 			}
+		}
+		if(m != i) {
+			int temp = T[m];
+			T[m] = T[i];
+			T[i] = temp;
 		}
 	}
 

@@ -48,7 +48,7 @@ bool valeurExiste(int T[], int n, int x) {
 
 
 
-int nombreOccurrence(int T[], int n, int x) {
+/*int nombreOccurrence(int T[], int n, int x) {
 
 	int cpt = 0;
 	if(valeurExiste(T, n, x)) {
@@ -62,6 +62,43 @@ int nombreOccurrence(int T[], int n, int x) {
 	}
 
 	return cpt;
+
+
+}*/
+
+int nombreOcc(int T[], int n, int x) {
+
+	int result1 = -1;
+	int result2 = -1;
+	int debut = 0;
+	int fin = n - 1;
+	while(debut <= fin) {
+		int M = (debut + fin) / 2;
+		if(T[M] == x) {
+			result1 = M;
+			fin = M - 1;
+		}else if(T[M] > x) {
+			fin = M - 1;
+		}else {
+			debut = M + 1;
+		}
+	
+	}
+	debut = 1;
+	fin = n - 1;
+	while(debut <= fin) {
+		int M = (debut + fin) /2;
+		if(T[M] == x) {
+			result2 = M;
+			debut = M + 1;
+		}else if(T[M] > x) {
+			fin = M - 1;
+		}else {
+			debut = M + 1;
+		}
+	}
+
+	return (result2 - result1 + 1);
 
 
 }
@@ -86,11 +123,11 @@ int main() {
 		scanf("%d", &T[i]);
 	}
 
-	if(estTri(T, n)) {
+	/*if(estTri(T, n)) {
 
 		for(int i = 0; i < n; i++) {
 
-			int tmp = nombreOccurrence(T, n, T[i]);
+			int tmp = nombreOcc(T, n, T[i]);
 			A[i] = tmp;
 		
 		}
@@ -107,6 +144,26 @@ int main() {
 	}else {
 		printf("Le Tableau n'est pas Trier. \n");
 	
+	}*/
+	int max = 1;
+	int cpt = 1;
+	if(estTri(T, n)) {
+		for(int i = 1; i < n; i++) {
+			if(T[i] == T[i - 1]) {
+				cpt++;
+			}else {
+				if(cpt > max) {
+					max = cpt;
+				}
+				cpt = 1;
+			}
+		}
+		if(cpt > max) {
+			max = cpt;
+		}
+		printf("La taille de la plus grande sequence : %d \n", max);
+	}else {
+		printf("Le tableau n'est pas Trier. \n");
 	}
 
 
